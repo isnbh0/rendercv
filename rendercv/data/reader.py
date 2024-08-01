@@ -8,6 +8,10 @@ import pathlib
 
 import ruamel.yaml
 
+from rendercv.data.models.multi_lang.rendercv_data_model import (
+    MultiLangRenderCVDataModel,
+)
+
 from . import models
 
 
@@ -69,6 +73,25 @@ def validate_input_dictionary_and_return_the_data_model(
 
     # Validate the parsed dictionary by creating an instance of RenderCVDataModel:
     rendercv_data_model = models.RenderCVDataModel(**input_dictionary)
+
+    return rendercv_data_model
+
+
+def validate_input_dictionary_and_return_the_data_model_multi_lang(
+    input_dictionary: dict,
+) -> MultiLangRenderCVDataModel:
+    """Validate the input dictionary by creating an instance of `RenderCVDataModel`,
+    which is a Pydantic data model of RenderCV's data format.
+
+    Args:
+        input_dictionary (dict): The input dictionary.
+
+    Returns:
+        RenderCVDataModel: The data model.
+    """
+
+    # Validate the parsed dictionary by creating an instance of RenderCVDataModel:
+    rendercv_data_model = MultiLangRenderCVDataModel(**input_dictionary)
 
     return rendercv_data_model
 

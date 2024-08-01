@@ -41,6 +41,7 @@ from .reader import (
     read_a_yaml_file,
     read_input_file,
     validate_input_dictionary_and_return_the_data_model,
+    validate_input_dictionary_and_return_the_data_model_multi_lang,
 )
 
 __all__ = [
@@ -69,4 +70,5 @@ __all__ = [
     "available_entry_models",
     "read_a_yaml_file",
     "validate_input_dictionary_and_return_the_data_model",
+    "validate_input_dictionary_and_return_the_data_model_multi_lang",
 ]

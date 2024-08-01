@@ -122,6 +122,14 @@ def cli_command_render(
             help="Don't generate the PNG file.",
         ),
     ] = False,
+    use_multi_language: Annotated[
+        bool,
+        typer.Option(
+            "--use-multi-language",
+            "-ml",
+            help="Use multi-language mode.",
+        ),
+    ] = False,
     # This is a dummy argument for the help message for
     # extra_data_model_override_argumets:
     _: Annotated[
@@ -188,9 +196,16 @@ def cli_command_render(
                 data_as_a_dict, key_and_values
             )
 
-        data_model = data.validate_input_dictionary_and_return_the_data_model(
-            data_as_a_dict
-        )
+        if use_multi_language:
+            data_model = (
+                data.validate_input_dictionary_and_return_the_data_model_multi_lang(
+                    data_as_a_dict
+                )
+            )
+        else:
+            data_model = data.validate_input_dictionary_and_return_the_data_model(
+                data_as_a_dict
+            )
 
         progress.finish_the_current_step()
 
