@@ -17,6 +17,12 @@ from .locale_catalog import LocaleCatalog
 class MultiLangRenderCVDataModel(RenderCVDataModel):
     """This class binds both the CV and the design information together."""
 
+    default_lang: str = pydantic.Field(
+        title="Default Language",
+        description="The default language of the CV.",
+        default="en",
+    )
+
     cv: CurriculumVitae = pydantic.Field(
         title="Curriculum Vitae",
         description="The data of the CV.",

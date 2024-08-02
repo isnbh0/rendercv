@@ -1,7 +1,13 @@
 cv:
-  name: John Doe
+  default_lang: en
+  name:
+    values:
+      ko: 존 도
+      en: John Doe
   sections:
     test_section:
-    - this is a text entry.
+    - values:
+        en: This is a test entry.
+        ko: 이것은 테스트 항목입니다.
 design:
   theme: classic

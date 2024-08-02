@@ -10,6 +10,8 @@ from typing import Annotated, Any, Literal, Optional, Type, get_args
 import pydantic
 import pydantic_extra_types.phone_numbers as pydantic_phone_numbers
 
+from rendercv.data.models.multi_lang.custom_types import MultiLangString
+
 from . import computers, entry_types
 from .base import RenderCVBaseModelWithExtraKeys, RenderCVBaseModelWithoutExtraKeys
 
@@ -25,7 +27,7 @@ class SectionBase(RenderCVBaseModelWithoutExtraKeys):
     create a section model based on any entry type.
     """
 
-    title: str
+    title: MultiLangString
     entry_type: str
     entries: list[Any]
 
@@ -133,6 +135,7 @@ def get_entry_type_name_and_section_validator(
 
     if isinstance(entry, dict):
         entry_type_name = None  # the entry type is not determined yet
+        print(entry, entry_types)
         characteristic_entry_attributes = get_characteristic_entry_attributes(
             entry_types
         )
@@ -375,12 +378,12 @@ class SocialNetwork(RenderCVBaseModelWithoutExtraKeys):
 class CurriculumVitae(RenderCVBaseModelWithExtraKeys):
     """This class is the data model of the `cv` field."""
 
-    name: Optional[str] = pydantic.Field(
+    name: Optional[MultiLangString] = pydantic.Field(
         default=None,
         title="Name",
         description="The name of the person.",
     )
-    location: Optional[str] = pydantic.Field(
+    location: Optional[MultiLangString] = pydantic.Field(
         default=None,
         title="Location",
         description="The location of the person.",

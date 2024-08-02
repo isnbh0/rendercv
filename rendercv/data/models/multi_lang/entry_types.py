@@ -10,6 +10,8 @@ from typing import Annotated, Literal, Optional
 
 import pydantic
 
+from rendercv.data.models.multi_lang.custom_types import MultiLangString
+
 from . import computers
 from .base import RenderCVBaseModelWithExtraKeys
 
@@ -178,7 +180,7 @@ class OneLineEntry(RenderCVBaseModelWithExtraKeys):
         title="Name",
         description="The label of the OneLineEntry.",
     )
-    details: str = pydantic.Field(
+    details: MultiLangString = pydantic.Field(
         title="Details",
         description="The details of the OneLineEntry.",
     )
@@ -187,7 +189,7 @@ class OneLineEntry(RenderCVBaseModelWithExtraKeys):
 class BulletEntry(RenderCVBaseModelWithExtraKeys):
     """This class is the data model of `BulletEntry`."""
 
-    bullet: str = pydantic.Field(
+    bullet: MultiLangString = pydantic.Field(
         title="Bullet",
         description="The bullet of the BulletEntry.",
     )
@@ -225,7 +227,7 @@ class PublicationEntryBase(RenderCVBaseModelWithExtraKeys):
         title="Publication Title",
         description="The title of the publication.",
     )
-    authors: list[str] = pydantic.Field(
+    authors: list[MultiLangString] = pydantic.Field(
         title="Authors",
         description="The authors of the publication in order as a list of strings.",
     )
@@ -242,7 +244,7 @@ class PublicationEntryBase(RenderCVBaseModelWithExtraKeys):
             "The URL of the publication. If DOI is provided, it will be ignored."
         ),
     )
-    journal: Optional[str] = pydantic.Field(
+    journal: Optional[MultiLangString] = pydantic.Field(
         default=None,
         title="Journal",
         description="The journal or conference name.",
@@ -301,7 +303,7 @@ class EntryBase(EntryWithDate):
     etc.
     """
 
-    location: Optional[str] = pydantic.Field(
+    location: Optional[MultiLangString] = pydantic.Field(
         default=None,
         title="Location",
         description="The location of the event.",
@@ -325,7 +327,7 @@ class EntryBase(EntryWithDate):
         ),
         examples=["2020-09-24", "present"],
     )
-    highlights: Optional[list[str]] = pydantic.Field(
+    highlights: Optional[list[MultiLangString]] = pydantic.Field(
         default=None,
         title="Highlights",
         description="The highlights of the event as a list of strings.",
@@ -411,11 +413,11 @@ class NormalEntry(EntryBase, NormalEntryBase):
 class ExperienceEntryBase(RenderCVBaseModelWithExtraKeys):
     """This class is the parent class of the `ExperienceEntry` class."""
 
-    company: str = pydantic.Field(
+    company: MultiLangString = pydantic.Field(
         title="Company",
         description="The company name.",
     )
-    position: str = pydantic.Field(
+    position: MultiLangString = pydantic.Field(
         title="Position",
         description="The position.",
     )
@@ -433,15 +435,15 @@ class ExperienceEntry(EntryBase, ExperienceEntryBase):
 class EducationEntryBase(RenderCVBaseModelWithExtraKeys):
     """This class is the parent class of the `EducationEntry` class."""
 
-    institution: str = pydantic.Field(
+    institution: MultiLangString = pydantic.Field(
         title="Institution",
         description="The institution name.",
     )
-    area: str = pydantic.Field(
+    area: MultiLangString = pydantic.Field(
         title="Area",
         description="The area of study.",
     )
-    degree: Optional[str] = pydantic.Field(
+    degree: Optional[MultiLangString] = pydantic.Field(
         default=None,
         title="Degree",
         description="The type of the degree.",
@@ -469,6 +471,7 @@ Entry = (
     | EducationEntry
     | PublicationEntry
     | BulletEntry
+    | MultiLangString
     | str
 )
 
@@ -480,6 +483,7 @@ ListOfEntries = (
     | list[EducationEntry]
     | list[PublicationEntry]
     | list[BulletEntry]
+    | list[MultiLangString]
     | list[str]
 )
 
